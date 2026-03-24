@@ -42,17 +42,20 @@ Ensure you have the following installed on your system:
 
 ### Quick Installation
 
-1. **Clone the repository:**
+1. **Download the repository:**
    ```bash
-   git clone https://github.com/ashishrobins-hub/ai-audio-analyzer.git
-   cd ai-audio-analyzer
+   git clone https://github.com/VILHEM-2004/AI-ML-audio-analyzer
+
+   then unzip the file and open that folder and in search bar type cmd and then step 2
    ```
 
 2. **Set up a virtual environment (Recommended):**
    ```bash
    python -m venv venv
+   
    source venv/bin/activate   # On macOS/Linux
-   # venv\Scripts\activate    # On Windows
+   
+   venv\Scripts\activate    # On Windows
    ```
 
 3. **Install all dependencies:**
