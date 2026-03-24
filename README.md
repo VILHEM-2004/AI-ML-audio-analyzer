@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![librosa](https://img.shields.io/badge/librosa-0.10+-orange?style=for-the-badge)](https://librosa.org/)
-[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
+
 
 Upload audio files (WAV, MP3, FLAC) and get an exhaustive analysis including tempo detection, musical key estimation, genre classification, and beautiful visualizations.
 
@@ -197,5 +197,5 @@ This code and its resources fall under the standard open-source **[MIT License](
 
 ---
 <div align="center">
-  <p><strong> Made by Ashish Robins</strong></p>
+  <p><strong> Made by VILHEM</strong></p>
 </div>
