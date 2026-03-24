@@ -46,7 +46,8 @@ Ensure you have the following installed on your system:
    ```bash
    git clone https://github.com/VILHEM-2004/AI-ML-audio-analyzer
 
-   then unzip the file and open that folder and in search bar type cmd and then step 2
+   then unzip the file AI-ML-audio-analyzer-main and open that folder AI-ML-audio-analyzer-main 
+   and then at file location bar type cmd and then step 2
    ```
 
 2. **Set up a virtual environment (Recommended):**
