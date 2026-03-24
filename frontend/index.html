@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Audio Analyzer – Intelligent Music Analysis</title>
+    <meta name="description"
+        content="Open-source AI-powered audio analysis tool. Upload audio files to extract tempo, key, genre, and generate stunning visualizations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="app-header">
+        <div class="header-content">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+                        <path d="M8 20V12M12 22V10M16 24V8M20 22V10M24 20V12" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6c63ff" />
+                                <stop offset="1" stop-color="#00d4ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="logo-text">AI Audio Analyzer</h1>
+                    <p class="logo-subtitle">Intelligent Music Analysis</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://github.com/VILHEM-2004" target="_blank" class="nav-link" id="github-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="app-main">
+        <!-- Hero Upload Section -->
+        <section id="upload-section" class="section">
+            <div class="section-header">
+                <span class="section-badge">Upload & Analyze</span>
+                <h2 class="section-title">Drop your audio file to begin</h2>
+                <p class="section-desc">Supports WAV, MP3, and FLAC files • Max 10 minutes</p>
+            </div>
+
+            <div id="drop-zone" class="drop-zone" tabindex="0" role="button" aria-label="Upload audio file">
+                <div class="drop-zone-content" id="drop-zone-content">
+                    <div class="drop-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="27" stroke="url(#dropGrad)" stroke-width="2"
+                                stroke-dasharray="6 4" opacity="0.6" />
+                            <path d="M28 18v16M20 28l8-8 8 8" stroke="url(#dropGrad)" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M18 38h20" stroke="url(#dropGrad)" stroke-width="2.5" stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="dropGrad" x1="0" y1="0" x2="56" y2="56">
+                                    <stop stop-color="#6c63ff" />
+                                    <stop offset="1" stop-color="#00d4ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <p class="drop-text">Drag & drop your audio file here</p>
+                    <p class="drop-subtext">or click to browse files</p>
+                    <div class="format-badges">
+                        <span class="format-badge">.WAV</span>
+                        <span class="format-badge">.MP3</span>
+                        <span class="format-badge">.FLAC</span>
+                    </div>
+                </div>
+                <input type="file" id="file-input" accept=".wav,.mp3,.flac,audio/wav,audio/mpeg,audio/flac" hidden>
+            </div>
+
+            <!-- File Info (shown after upload) -->
+            <div id="file-info" class="file-info hidden">
+                <div class="file-info-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18V5l12-2v13" />
+                        <circle cx="6" cy="18" r="3" />
+                        <circle cx="18" cy="16" r="3" />
+                    </svg>
+                </div>
+                <div class="file-info-details">
+                    <span id="file-name" class="file-name">filename.mp3</span>
+                    <span id="file-size" class="file-size">0 MB</span>
+                </div>
+                <button id="clear-file-btn" class="btn-icon" aria-label="Remove file" title="Remove file">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Analyze Button -->
+            <button id="analyze-btn" class="btn-primary hidden" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                <span>Analyze Audio</span>
+            </button>
+        </section>
+
+        <!-- Loading State -->
+        <section id="loading-section" class="section hidden">
+            <div class="loader-container">
+                <div class="loader-ring">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                </div>
+                <h3 class="loader-text">Analyzing your audio...</h3>
+                <p class="loader-subtext" id="loader-status">Loading audio file</p>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar" id="loader-progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error State -->
+        <section id="error-section" class="section hidden">
+            <div class="error-card">
+                <div class="error-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ff6b9d" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                </div>
+                <h3 class="error-title">Analysis Failed</h3>
+                <p class="error-message" id="error-message">An unknown error occurred.</p>
+                <button id="retry-btn" class="btn-secondary">Try Again</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="section hidden">
+            <!-- Quick Stats Row -->
+            <div class="stats-row" id="stats-row">
+                <div class="stat-card" id="stat-tempo">
+                    <div class="stat-icon tempo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-tempo-value">—</div>
+                    <div class="stat-label">BPM</div>
+                    <div class="stat-confidence" id="stat-tempo-confidence"></div>
+                </div>
+                <div class="stat-card" id="stat-key">
+                    <div class="stat-icon key-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 18V5l12-2v13" />
+                            <circle cx="6" cy="18" r="3" />
+                            <circle cx="18" cy="16" r="3" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-key-value">—</div>
+                    <div class="stat-label">Musical Key</div>
+                    <div class="stat-confidence" id="stat-key-confidence"></div>
+                </div>
+                <div class="stat-card" id="stat-energy">
+                    <div class="stat-icon energy-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-energy-value">—</div>
+                    <div class="stat-label">Energy Level</div>
+                </div>
+                <div class="stat-card" id="stat-genre">
+                    <div class="stat-icon genre-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-genre-value">—</div>
+                    <div class="stat-label">Genre</div>
+                    <div class="stat-confidence" id="stat-genre-confidence"></div>
+                </div>
+                <div class="stat-card" id="stat-duration">
+                    <div class="stat-icon duration-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-duration-value">—</div>
+                    <div class="stat-label">Duration</div>
+                </div>
+                <div class="stat-card" id="stat-analysis-time">
+                    <div class="stat-icon analysis-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="stat-analysis-time-value">—</div>
+                    <div class="stat-label">Analysis Time</div>
+                </div>
+            </div>
+
+            <!-- Genre Probabilities -->
+            <div class="result-card" id="genre-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                        Genre Classification
+                    </h3>
+                </div>
+                <div class="card-body" id="genre-bars"></div>
+            </div>
+
+            <!-- Visualizations -->
+            <div class="viz-grid" id="viz-grid">
+                <div class="viz-card" id="viz-waveform">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M2 12h2l3-9 4 18 4-18 3 9h2" />
+                            </svg>
+                            Waveform
+                        </h3>
+                    </div>
+                    <div class="card-body viz-body">
+                        <img id="img-waveform" class="viz-image" alt="Waveform visualization">
+                    </div>
+                </div>
+
+                <div class="viz-card" id="viz-spectrogram">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+                            </svg>
+                            Spectrogram
+                        </h3>
+                    </div>
+                    <div class="card-body viz-body">
+                        <img id="img-spectrogram" class="viz-image" alt="Spectrogram visualization">
+                    </div>
+                </div>
+
+                <div class="viz-card" id="viz-chromagram">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 18V5l12-2v13" />
+                                <circle cx="6" cy="18" r="3" />
+                                <circle cx="18" cy="16" r="3" />
+                            </svg>
+                            Chromagram
+                        </h3>
+                    </div>
+                    <div class="card-body viz-body">
+                        <img id="img-chromagram" class="viz-image" alt="Chromagram visualization">
+                    </div>
+                </div>
+
+                <div class="viz-card" id="viz-spectral">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                            Spectral Features
+                        </h3>
+                    </div>
+                    <div class="card-body viz-body">
+                        <img id="img-spectral_features" class="viz-image" alt="Spectral features visualization">
+                    </div>
+                </div>
+
+                <div class="viz-card" id="viz-mfcc">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="14" y="14" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                            </svg>
+                            MFCC Coefficients
+                        </h3>
+                    </div>
+                    <div class="card-body viz-body">
+                        <img id="img-mfcc" class="viz-image" alt="MFCC visualization">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Details -->
+            <div class="result-card" id="features-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 20V10M18 20V4M6 20v-4" />
+                        </svg>
+                        Detailed Features
+                    </h3>
+                    <button class="btn-icon toggle-btn" id="toggle-features" aria-label="Toggle features">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-body collapsible" id="features-body"></div>
+            </div>
+
+            <!-- New Analysis Button -->
+            <div class="center-action">
+                <button id="new-analysis-btn" class="btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                    </svg>
+                    <span>New Analysis</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="app-footer">
+        <div class="footer-content">
+            <p class="footer-text">AI Audio Analyzer &bull; Open Source &bull; MIT License</p>
+            <p class="footer-sub">Built with Python, FastAPI, librosa &amp; scikit-learn</p>
+            <p class="footer-sub" style="margin-top: 12px; font-weight: 500; font-size: 0.85rem; color: #00d4ff;">Made
+                by VILHEM</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
